@@ -9,23 +9,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
 @RestController
+@RequestMapping("/activities")
 public class ActivityController {
-    private final ActivityService activityService;
     @Autowired
-    public ActivityController(ActivityService activityService) {
-        this.activityService = activityService;
-    }
-    @PostMapping("/activities")
-    public ActivityDto addActivity(@RequestBody Activity activity) {
+    ActivityService activityService;
+    @PostMapping
+    public ActivityDto addActivity(@RequestBody ActivityDto activity) {
         return activityService.save(activity);
     }
-    @GetMapping("/activities")
+    @GetMapping
     public List<ActivityDto> getActivities() {
         return activityService.findAll();
     }
-    @GetMapping("activities/{id}")
+    @GetMapping("/{id}")
     public ActivityDto getActivity(@PathVariable Integer id) {
         return activityService.findById(id);
     }

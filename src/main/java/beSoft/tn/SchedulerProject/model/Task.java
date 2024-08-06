@@ -1,10 +1,13 @@
 package beSoft.tn.SchedulerProject.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class Task {
     @Id
     @GeneratedValue
@@ -25,14 +29,19 @@ public class Task {
     private String status;
     private LocalDate starting;
     private LocalDate ending;
+    @JsonBackReference
     @OneToOne
     private AppUser assignedTo;
+    @JsonBackReference
     @OneToOne
     private Project project;
-    @OneToMany
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Comment> comments;
-    @OneToMany
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Activity> activities;
-    @OneToMany
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Dependency> dependencies;
 }

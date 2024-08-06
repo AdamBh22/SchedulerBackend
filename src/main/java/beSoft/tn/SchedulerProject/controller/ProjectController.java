@@ -9,23 +9,21 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
 @RestController
+@RequestMapping("/projects")
 public class ProjectController {
-    private final ProjectService projectService;
     @Autowired
-    public ProjectController(ProjectService projectService) {
-        this.projectService = projectService;
-    }
-    @PostMapping("/projects")
-    public ProjectDto saveProject(@RequestBody Project project) {
+    ProjectService projectService;
+
+    @PostMapping
+    public ProjectDto saveProject(@RequestBody ProjectDto project) {
         return projectService.save(project);
     }
-    @GetMapping("/projects")
+    @GetMapping
     public List<ProjectDto> getAllProjects() {
         return projectService.findAll();
     }
-    @GetMapping("/projects/{id}")
+    @GetMapping("/{id}")
     public ProjectDto getProject(@PathVariable Integer id) {
         return projectService.findById(id);
     }

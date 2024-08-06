@@ -1,14 +1,17 @@
 package beSoft.tn.SchedulerProject.dto;
 
-import beSoft.tn.SchedulerProject.model.Task;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class DependencyDto {
     private Integer id;
     private String status;
-    private TaskDto task1;
-    private TaskDto task2;
+    private TaskDto ParentTask;
+    private TaskDto ChildTask;
 }

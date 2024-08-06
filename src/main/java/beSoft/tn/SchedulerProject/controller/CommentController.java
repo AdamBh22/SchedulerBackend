@@ -8,23 +8,20 @@ import org.springframework.web.bind.annotation.*;
 import beSoft.tn.SchedulerProject.model.Comment;
 
 import java.util.List;
-@Controller
 @RestController
+@RequestMapping("/comments")
 public class CommentController {
-    private final CommentService commentService;
     @Autowired
-    public CommentController(CommentService commentService) {
-        this.commentService = commentService;
-    }
-    @PostMapping("/comments")
-    public CommentDto createComment(@RequestBody Comment comment) {
+    CommentService commentService;
+    @PostMapping
+    public CommentDto createComment(@RequestBody CommentDto comment) {
         return commentService.save(comment);
     }
-    @GetMapping("/comments")
+    @GetMapping
     public List<CommentDto> getAllComments() {
         return commentService.getAll();
     }
-    @GetMapping("/comments/{id}")
+    @GetMapping("/{id}")
     public CommentDto getComment(@PathVariable Integer id) {
         return commentService.getById(id);
     }

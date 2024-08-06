@@ -9,23 +9,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
 @RestController
+@RequestMapping("/recents")
 public class RecentController {
-    private final RecentService recentService;
     @Autowired
-    public RecentController(RecentService recentService) {
-        this.recentService = recentService;
-    }
-    @PostMapping("/recents")
-    public RecentDto addRecent(@RequestBody Recent recent) {
+    RecentService recentService;
+    @PostMapping
+    public RecentDto addRecent(@RequestBody RecentDto recent) {
         return recentService.saveRecent(recent);
     }
-    @GetMapping("/recents")
+    @GetMapping
     public List<RecentDto> getAllRecents() {
         return recentService.getAllRecents();
     }
-    @GetMapping("/recents/{id}")
+    @GetMapping("/{id}")
     public RecentDto getRecentById(@PathVariable Integer id) {
         return recentService.getRecentById(id);
     }

@@ -1,11 +1,15 @@
 package beSoft.tn.SchedulerProject.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Builder
@@ -13,23 +17,34 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 public class AppUser {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String fullName;
     @Column(unique = true)
     private String email;
     private String role;
     private String password;
-    @OneToMany
+
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Task> tasks;
-    @OneToMany
+
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Comment> comments;
-    @OneToMany
+
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Activity> activities;
-    @OneToMany
+
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Recent> recents;
-    @OneToMany
+
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Project> projects;
 }

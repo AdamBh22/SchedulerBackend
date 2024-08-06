@@ -1,33 +1,35 @@
 package beSoft.tn.SchedulerProject.controller;
 
 import beSoft.tn.SchedulerProject.dto.AppUserDto;
-import beSoft.tn.SchedulerProject.model.AppUser;
 import beSoft.tn.SchedulerProject.services.AppUserService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-@Controller
+@AllArgsConstructor
 @RestController
+@RequestMapping("/users")
 public class AppUserController {
-    private final AppUserService appUserService;
+
     @Autowired
-    public AppUserController(final AppUserService appUserService) {
-        this.appUserService = appUserService;
-    }
-    @PostMapping("/users")
-    public AppUserDto addAppUser(@RequestBody final AppUser appUser) {
+    AppUserService appUserService;
+
+    @PostMapping(value = "/add",produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public AppUserDto addAppUser(@RequestBody AppUserDto appUser) {
         return appUserService.save(appUser);
     }
-    @GetMapping("/users")
+
+    @GetMapping
     public List<AppUserDto> getAllAppUsers() {
         return appUserService.findAllAppUsers();
     }
-    @GetMapping("/users/{id}")
-    public AppUserDto getAppUser(@PathVariable final Integer id) {
+
+    @GetMapping(value = "/{id}")
+    public AppUserDto getAppUser(@PathVariable Integer id) {
         return appUserService.findAppUserById(id);
     }
 }
