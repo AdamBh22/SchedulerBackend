@@ -17,16 +17,16 @@ public class DependencyService {
 
     public DependencyDto findById(Integer id) {
         Dependency dependency=dependencyRepository.findById(id).orElse(null);
-        return DependencyMapper.INSTANCE.toDto(dependency);
+        return DependencyMapper.INSTANCE.dependencyToDependencyDto(dependency);
     }
 
     public List<DependencyDto> findAll() {
         List<Dependency> dependencies = dependencyRepository.findAll();
-        return dependencies.stream().map(DependencyMapper.INSTANCE::toDto).toList();
+        return dependencies.stream().map(DependencyMapper.INSTANCE::dependencyToDependencyDto).toList();
     }
 
     public DependencyDto save(DependencyDto dependencyDto) {
-        Dependency dependency=DependencyMapper.INSTANCE.toEntity(dependencyDto);
-        return DependencyMapper.INSTANCE.toDto(dependencyRepository.save(dependency));
+        Dependency dependency=DependencyMapper.INSTANCE.dependencyDtoToDependency(dependencyDto);
+        return DependencyMapper.INSTANCE.dependencyToDependencyDto(dependencyRepository.save(dependency));
     }
 }

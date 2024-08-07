@@ -28,4 +28,36 @@ public class Recent {
     @JsonBackReference
     @OneToOne
     private AppUser user;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public RecentType getType() {
+        return type;
+    }
+
+    public void setType(RecentType type) {
+        this.type = type;
+    }
+
+    public AppUser getUser() {
+        return user;
+    }
+
+    public void setUser(AppUser user) {
+        this.user = user;
+    }
 }

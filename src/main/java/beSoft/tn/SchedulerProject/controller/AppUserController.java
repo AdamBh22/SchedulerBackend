@@ -5,6 +5,7 @@ import beSoft.tn.SchedulerProject.services.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,10 +18,10 @@ public class AppUserController {
     @Autowired
     AppUserService appUserService;
 
-    @PostMapping(value = "/add",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/add")
     @ResponseBody
-    public AppUserDto addAppUser(@RequestBody AppUserDto appUser) {
-        return appUserService.save(appUser);
+    public ResponseEntity<?> addAppUser(@RequestBody AppUserDto appUserDto) {
+        return ResponseEntity.ok(appUserService.save(appUserDto));
     }
 
     @GetMapping

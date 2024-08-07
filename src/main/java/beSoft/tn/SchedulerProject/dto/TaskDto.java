@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 import java.util.List;
 
-@Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -25,4 +24,100 @@ public class TaskDto {
     private List<CommentDto> comments;
     private List<ActivityDto> activities;
     private List<DependencyDto> dependencies;
+
+    public List<DependencyDto> getDependencies() {
+        return dependencies;
+    }
+
+    public void setDependencies(List<DependencyDto> dependencies) {
+        this.dependencies = dependencies;
+    }
+
+    public List<ActivityDto> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(List<ActivityDto> activities) {
+        this.activities = activities;
+    }
+
+    public List<CommentDto> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentDto> comments) {
+        this.comments = comments;
+    }
+
+    public ProjectDto getProject() {
+        return project;
+    }
+
+    public void setProject(ProjectDto project) {
+        this.project = project;
+    }
+
+    public AppUserDto getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(AppUserDto assignedTo) {
+        this.assignedTo = assignedTo;
+    }
+
+    public LocalDate getEnding() {
+        return ending;
+    }
+
+    public void setEnding(LocalDate ending) {
+        this.ending = ending;
+    }
+
+    public LocalDate getStarting() {
+        return starting;
+    }
+
+    public void setStarting(LocalDate starting) {
+        this.starting = starting;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

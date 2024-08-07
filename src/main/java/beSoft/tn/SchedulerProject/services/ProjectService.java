@@ -17,18 +17,18 @@ public class ProjectService {
 
     public List<ProjectDto> findAll() {
         List<Project> projects = repository.findAll();
-        return projects.stream().map(ProjectMapper.INSTANCE::toDto).toList();
+        return projects.stream().map(ProjectMapper.INSTANCE::projectToProjectDto).toList();
     }
 
     public ProjectDto findById(Integer id) {
         Project project= repository.findById(id).orElse(null);
-        return ProjectMapper.INSTANCE.toDto(project);
+        return ProjectMapper.INSTANCE.projectToProjectDto(project);
     }
 
     public ProjectDto save(ProjectDto projectDto) {
-        Project project = ProjectMapper.INSTANCE.toEntity(projectDto);
+        Project project = ProjectMapper.INSTANCE.projectDtoToProject(projectDto);
         Project savedProject= repository.save(project);
-        return ProjectMapper.INSTANCE.toDto(savedProject);
+        return ProjectMapper.INSTANCE.projectToProjectDto(savedProject);
     }
 
 }

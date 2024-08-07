@@ -26,22 +26,22 @@ public class AppUserService {
 
     public List<AppUserDto> findAllAppUsers() {
         List<AppUser> list = appUserRepository.findAll();
-        return list.stream().map(AppUserMapper.INSTANCE::toDto).collect(Collectors.toList());
+        return list.stream().map(AppUserMapper.INSTANCE::appUserToAppUserDto).collect(Collectors.toList());
     }
 
     public AppUserDto findAppUserById(Integer id) {
         Optional<AppUser> optionalAppUser = appUserRepository.findById(id);
-        return optionalAppUser.map(AppUserMapper.INSTANCE::toDto).orElse(null);
+        return optionalAppUser.map(AppUserMapper.INSTANCE::appUserToAppUserDto).orElse(null);
     }
 
     public AppUserDto save(AppUserDto appUserDto) {
-        AppUser appUser = AppUserMapper.INSTANCE.toEntity(appUserDto);
+        AppUser appUser = AppUserMapper.INSTANCE.appUserDtoToAppUser(appUserDto);
         AppUser user = appUserRepository.save(appUser);
-        return AppUserMapper.INSTANCE.toDto(user);
+        return AppUserMapper.INSTANCE.appUserToAppUserDto(user);
     }
 
     public AppUserDto update(AppUserDto appUserDto) {
-        AppUser appUser = AppUserMapper.INSTANCE.toEntity(appUserDto);
-        return AppUserMapper.INSTANCE.toDto(appUserRepository.save(appUser));
+        AppUser appUser = AppUserMapper.INSTANCE.appUserDtoToAppUser(appUserDto);
+        return AppUserMapper.INSTANCE.appUserToAppUserDto(appUserRepository.save(appUser));
     }
 }

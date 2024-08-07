@@ -44,4 +44,102 @@ public class Task {
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL)
     private List<Dependency> dependencies;
+
+
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDate getStarting() {
+        return starting;
+    }
+
+    public void setStarting(LocalDate starting) {
+        this.starting = starting;
+    }
+
+    public LocalDate getEnding() {
+        return ending;
+    }
+
+    public void setEnding(LocalDate ending) {
+        this.ending = ending;
+    }
+
+    public AppUser getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(AppUser assignedTo) {
+        this.assignedTo = assignedTo;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
+    }
+
+    public List<Dependency> getDependencies() {
+        return dependencies;
+    }
+
+    public void setDependencies(List<Dependency> dependencies) {
+        this.dependencies = dependencies;
+    }
 }

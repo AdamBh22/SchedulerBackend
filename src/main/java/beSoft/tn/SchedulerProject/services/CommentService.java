@@ -15,18 +15,18 @@ public class CommentService {
     CommentRepository commentRepository;
 
     public CommentDto save(CommentDto commentDto) {
-        Comment comment = CommentMapper.INSTANCE.toEntity(commentDto);
-        return CommentMapper.INSTANCE.toDto(commentRepository.save(comment));
+        Comment comment = CommentMapper.INSTANCE.commentDtoToComment(commentDto);
+        return CommentMapper.INSTANCE.commentToCommentDto(commentRepository.save(comment));
     }
 
     public CommentDto getById(Integer id) {
         Comment comment= commentRepository.findById(id).orElse(null);
-        return CommentMapper.INSTANCE.toDto(comment);
+        return CommentMapper.INSTANCE.commentToCommentDto(comment);
     }
 
     public List<CommentDto> getAll() {
         List<Comment> comments=commentRepository.findAll();
-        return comments.stream().map(CommentMapper.INSTANCE::toDto).toList();
+        return comments.stream().map(CommentMapper.INSTANCE::commentToCommentDto).toList();
     }
 
 }

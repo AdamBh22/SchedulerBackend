@@ -1,10 +1,8 @@
 package beSoft.tn.SchedulerProject.controller;
 
 import beSoft.tn.SchedulerProject.dto.ProjectDto;
-import beSoft.tn.SchedulerProject.model.Project;
 import beSoft.tn.SchedulerProject.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,7 +15,8 @@ public class ProjectController {
 
     @PostMapping
     public ProjectDto saveProject(@RequestBody ProjectDto project) {
-        return projectService.save(project);
+        ProjectDto result = projectService.save(project);
+        return result;
     }
     @GetMapping
     public List<ProjectDto> getAllProjects() {

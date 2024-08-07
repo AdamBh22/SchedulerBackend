@@ -27,6 +27,31 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Task> tasks;
     @JsonManagedReference
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private AppUser owner;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
 }

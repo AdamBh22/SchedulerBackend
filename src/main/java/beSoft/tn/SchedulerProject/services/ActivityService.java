@@ -17,16 +17,16 @@ public class ActivityService {
     ActivityRepository activityRepository;
 
     public ActivityDto save(ActivityDto activityDto) {
-        Activity activity=ActivityMapper.INSTANCE.toEntity(activityDto);
+        Activity activity=ActivityMapper.INSTANCE.activityDtoToActivity(activityDto);
         Activity savedActivity=activityRepository.save(activity);
-        return ActivityMapper.INSTANCE.toDto(savedActivity);
+        return ActivityMapper.INSTANCE.activityToActivityDto(savedActivity);
     }
     public ActivityDto findById(Integer id) {
         Activity result=activityRepository.findById(id).orElse(null);
-         return ActivityMapper.INSTANCE.toDto(result);
+         return ActivityMapper.INSTANCE.activityToActivityDto(result);
     }
     public List<ActivityDto> findAll() {
         List<Activity> activities=activityRepository.findAll();
-        return activities.stream().map(ActivityMapper.INSTANCE::toDto).collect(Collectors.toList());
+        return activities.stream().map(ActivityMapper.INSTANCE::activityToActivityDto).collect(Collectors.toList());
     }
 }
