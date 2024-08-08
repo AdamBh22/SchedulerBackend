@@ -13,14 +13,14 @@ import java.util.List;
 public interface ProjectMapper {
     ProjectMapper INSTANCE = Mappers.getMapper(ProjectMapper.class);
 
-   // AppUser appUserDtoToAppUser(AppUserDto appUserDto);
-   // AppUserDto appUserToAppUserDto(AppUser appUser);
+    Project projectDtoToProject(ProjectDto projectDto);
+    ProjectDto projectToProjectDto(Project project);
+
+    AppUser appUserDtoToAppUser(AppUserDto appUserDto);
+    AppUserDto appUserToAppUserDto(AppUser appUser);
     List<AppUserDto> appUserListToAppUserDtoList(List<AppUser> appUserList);
     List<AppUser> appUserDtoListToAppUserList(List<AppUserDto> appUserDtoList);
 
-
-    Project projectDtoToProject(ProjectDto projectDto);
-    ProjectDto projectToProjectDto(Project project);
     List<Project> projectDtoListToProjectList(List<ProjectDto> projectDtoList);
     List<ProjectDto> projectListToProjectDtoList(List<Project> projectList);
 

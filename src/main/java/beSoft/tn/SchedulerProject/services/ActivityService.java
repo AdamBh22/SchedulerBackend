@@ -29,4 +29,26 @@ public class ActivityService {
         List<Activity> activities=activityRepository.findAll();
         return activities.stream().map(ActivityMapper.INSTANCE::activityToActivityDto).collect(Collectors.toList());
     }
+
+    public ActivityDto updateId(ActivityDto activityDto, Integer id) {
+        if(activityDto == null){
+            return null;
+        }
+        activityDto.setId(id);
+        Activity activity=ActivityMapper.INSTANCE.activityDtoToActivity(activityDto);
+        Activity savedActivity=activityRepository.save(activity);
+        return ActivityMapper.INSTANCE.activityToActivityDto(savedActivity);
+    }
+    public void deleteById(Integer id) {
+        activityRepository.deleteById(id);
+    }
+    public ActivityDto updateName(ActivityDto activityDto, String name) {
+        if(activityDto == null){
+            return null;
+        }
+        activityDto.setName(name);
+        Activity activity=ActivityMapper.INSTANCE.activityDtoToActivity(activityDto);
+        Activity savedActivity=activityRepository.save(activity);
+        return ActivityMapper.INSTANCE.activityToActivityDto(savedActivity);
+    }
 }

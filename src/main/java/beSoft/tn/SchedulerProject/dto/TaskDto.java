@@ -19,7 +19,7 @@ public class TaskDto {
     private String status;
     private LocalDate starting;
     private LocalDate ending;
-    private AppUserDto assignedTo;
+    private Integer UserId;
     private ProjectDto project;
     private List<CommentDto> comments;
     private List<ActivityDto> activities;
@@ -57,13 +57,6 @@ public class TaskDto {
         this.project = project;
     }
 
-    public AppUserDto getAssignedTo() {
-        return assignedTo;
-    }
-
-    public void setAssignedTo(AppUserDto assignedTo) {
-        this.assignedTo = assignedTo;
-    }
 
     public LocalDate getEnding() {
         return ending;
@@ -119,5 +112,13 @@ public class TaskDto {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(Integer userId) {
+        UserId = userId;
     }
 }

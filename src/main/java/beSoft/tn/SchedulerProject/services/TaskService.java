@@ -29,4 +29,15 @@ public class TaskService {
         Task task=TaskMapper.INSTANCE.taskDtoToTask(taskDto);
         return TaskMapper.INSTANCE.taskToTaskDto(taskRepository.save(task));
     }
+    public void deleteTaskById(Integer id) {
+        taskRepository.deleteById(id);
+    }
+    public TaskDto updateStatus(TaskDto taskDto,String Status) {
+        if(taskDto == null){
+            return null;
+        }
+        Task task=TaskMapper.INSTANCE.taskDtoToTask(taskDto);
+        task.setStatus(Status);
+        return TaskMapper.INSTANCE.taskToTaskDto(taskRepository.save(task));
+    }
 }

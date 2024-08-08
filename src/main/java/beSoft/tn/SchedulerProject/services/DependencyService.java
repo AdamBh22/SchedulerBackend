@@ -29,4 +29,16 @@ public class DependencyService {
         Dependency dependency=DependencyMapper.INSTANCE.dependencyDtoToDependency(dependencyDto);
         return DependencyMapper.INSTANCE.dependencyToDependencyDto(dependencyRepository.save(dependency));
     }
+
+    public void delete(Integer id) {
+        dependencyRepository.deleteById(id);
+    }
+    public DependencyDto update(String Status, DependencyDto dependencyDto) {
+        if(dependencyDto == null){
+            return null;
+        }
+        dependencyDto.setStatus(Status);
+        Dependency dependency=DependencyMapper.INSTANCE.dependencyDtoToDependency(dependencyDto);
+        return DependencyMapper.INSTANCE.dependencyToDependencyDto(dependencyRepository.save(dependency));
+    }
 }

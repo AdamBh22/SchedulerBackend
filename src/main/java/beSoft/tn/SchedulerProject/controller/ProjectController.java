@@ -26,4 +26,9 @@ public class ProjectController {
     public ProjectDto getProject(@PathVariable Integer id) {
         return projectService.findById(id);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteProject(@PathVariable Integer id) {
+        projectService.delete(id);
+    }
 }

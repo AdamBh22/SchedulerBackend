@@ -15,7 +15,7 @@ import java.util.List;
 public class ProjectDto {
     private Integer id;
     private String name;
-    private AppUserDto owner;
+    private List<AppUserDto> users;
     private List<TaskDto> tasks;
 
     public Integer getId() {
@@ -42,11 +42,11 @@ public class ProjectDto {
         this.tasks = tasks;
     }
 
-    public AppUserDto getOwner() {
-        return owner;
+    public List<AppUserDto> getUsers() {
+        return users;
     }
 
-    public void setOwner(AppUserDto owner) {
-        this.owner = owner;
+    public void setUsers(List<AppUserDto> users) {
+        this.users = users;
     }
 }

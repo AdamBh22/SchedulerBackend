@@ -26,8 +26,8 @@ public class RecentService {
     }
 
     public RecentDto saveRecent(RecentDto recentDto) {
-        Recent recent= recentRepository.save(RecentMapper.INSTANCE.recentDtoToRecent(recentDto));
+        Recent recent1=RecentMapper.INSTANCE.recentDtoToRecent(recentDto);
+        Recent recent= recentRepository.save(recent1);
         return RecentMapper.INSTANCE.recentToRecentDto(recent);
     }
-
 }

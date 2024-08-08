@@ -29,4 +29,19 @@ public class CommentService {
         return comments.stream().map(CommentMapper.INSTANCE::commentToCommentDto).toList();
     }
 
+    public CommentDto delete(Integer id) {
+        Comment comment=commentRepository.findById(id).orElse(null);
+        commentRepository.delete(comment);
+        return CommentMapper.INSTANCE.commentToCommentDto(comment);
+    }
+
+    public CommentDto update(String text, CommentDto commentDto) {
+        if(commentDto==null) {
+            return null;
+        }
+        commentDto.setText(text);
+        Comment comment=CommentMapper.INSTANCE.commentDtoToComment(commentDto);
+        return CommentMapper.INSTANCE.commentToCommentDto(commentRepository.save(comment));
+    }
+
 }

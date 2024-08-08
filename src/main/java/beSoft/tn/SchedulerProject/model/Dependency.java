@@ -2,6 +2,7 @@ package beSoft.tn.SchedulerProject.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,12 +21,10 @@ public class Dependency {
     @GeneratedValue
     private Integer id;
     private String status;
+    private Integer relatedTaskId;
     @JsonBackReference
-    @OneToOne
-    private Task ParentTask;
-    @JsonBackReference
-    @OneToOne
-    private Task ChildTask2;
+    @ManyToOne
+    private Task Task;
 
     public Integer getId() {
         return id;
@@ -43,19 +42,19 @@ public class Dependency {
         this.status = status;
     }
 
-    public Task getParentTask() {
-        return ParentTask;
+    public Integer getRelatedTaskId() {
+        return relatedTaskId;
     }
 
-    public void setParentTask(Task parentTask) {
-        ParentTask = parentTask;
+    public void setRelatedTaskId(Integer relatedTaskId) {
+        this.relatedTaskId = relatedTaskId;
     }
 
-    public Task getChildTask2() {
-        return ChildTask2;
+    public beSoft.tn.SchedulerProject.model.Task getTask() {
+        return Task;
     }
 
-    public void setChildTask2(Task childTask2) {
-        ChildTask2 = childTask2;
+    public void setTask(beSoft.tn.SchedulerProject.model.Task task) {
+        Task = task;
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class ProjectService {
@@ -31,4 +30,7 @@ public class ProjectService {
         return ProjectMapper.INSTANCE.projectToProjectDto(savedProject);
     }
 
+    public void delete(Integer id) {
+        repository.deleteById(id);
+    }
 }

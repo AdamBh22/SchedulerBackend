@@ -27,8 +27,8 @@ public class Project {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Task> tasks;
     @JsonManagedReference
-    @OneToOne(cascade = CascadeType.ALL)
-    private AppUser owner;
+    @ManyToMany
+    private List<AppUser> users;
 
     public Integer getId() {
         return id;
@@ -54,4 +54,11 @@ public class Project {
         this.tasks = tasks;
     }
 
+    public List<AppUser> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<AppUser> users) {
+        this.users = users;
+    }
 }

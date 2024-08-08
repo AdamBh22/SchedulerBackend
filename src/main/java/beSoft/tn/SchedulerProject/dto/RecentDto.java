@@ -6,13 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class RecentDto {
     private Integer id;
-    private String name;
     private String type;
+    private LocalDate date;
     private AppUserDto user;
 
     public Integer getId() {
@@ -21,14 +23,6 @@ public class RecentDto {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getType() {
@@ -45,5 +39,13 @@ public class RecentDto {
 
     public void setUser(AppUserDto user) {
         this.user = user;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

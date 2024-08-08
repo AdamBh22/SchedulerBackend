@@ -19,11 +19,9 @@ public class Comment {
     @GeneratedValue
     private Integer id;
     private String text;
+    private Integer userId;
     @JsonBackReference
-    @OneToOne
-    private AppUser author;
-    @JsonBackReference
-    @OneToOne
+    @ManyToOne
     private Task task;
 
     public Integer getId() {
@@ -42,19 +40,19 @@ public class Comment {
         this.text = text;
     }
 
-    public AppUser getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(AppUser author) {
-        this.author = author;
-    }
-
     public Task getTask() {
         return task;
     }
 
     public void setTask(Task task) {
         this.task = task;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

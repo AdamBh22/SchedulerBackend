@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 public class DependencyDto {
     private Integer id;
     private String status;
-    private TaskDto ParentTask;
-    private TaskDto ChildTask;
+    private Integer relatedTaskId;
+    private TaskDto task;
 
     public Integer getId() {
         return id;
@@ -30,19 +30,19 @@ public class DependencyDto {
         this.status = status;
     }
 
-    public TaskDto getParentTask() {
-        return ParentTask;
+    public Integer getRelatedTaskId() {
+        return relatedTaskId;
     }
 
-    public void setParentTask(TaskDto parentTask) {
-        ParentTask = parentTask;
+    public void setRelatedTaskId(Integer relatedTaskId) {
+        this.relatedTaskId = relatedTaskId;
     }
 
-    public TaskDto getChildTask() {
-        return ChildTask;
+    public TaskDto getTask() {
+        return task;
     }
 
-    public void setChildTask(TaskDto childTask) {
-        ChildTask = childTask;
+    public void setTask(TaskDto task) {
+        this.task = task;
     }
 }

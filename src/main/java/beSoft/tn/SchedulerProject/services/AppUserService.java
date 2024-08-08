@@ -4,7 +4,6 @@ import beSoft.tn.SchedulerProject.Mapper.AppUserMapper;
 import beSoft.tn.SchedulerProject.dto.AppUserDto;
 import beSoft.tn.SchedulerProject.model.AppUser;
 import beSoft.tn.SchedulerProject.repository.AppUserRepository;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,8 +39,4 @@ public class AppUserService {
         return AppUserMapper.INSTANCE.appUserToAppUserDto(user);
     }
 
-    public AppUserDto update(AppUserDto appUserDto) {
-        AppUser appUser = AppUserMapper.INSTANCE.appUserDtoToAppUser(appUserDto);
-        return AppUserMapper.INSTANCE.appUserToAppUserDto(appUserRepository.save(appUser));
-    }
 }

@@ -4,13 +4,12 @@ import beSoft.tn.SchedulerProject.dto.AppUserDto;
 import beSoft.tn.SchedulerProject.services.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@AllArgsConstructor
+
 @RestController
 @RequestMapping("/users")
 public class AppUserController {
@@ -18,10 +17,11 @@ public class AppUserController {
     @Autowired
     AppUserService appUserService;
 
-    @PostMapping(value = "/add")
-    @ResponseBody
-    public ResponseEntity<?> addAppUser(@RequestBody AppUserDto appUserDto) {
-        return ResponseEntity.ok(appUserService.save(appUserDto));
+    @PostMapping( "/add")
+    //@ResponseBody
+    public ResponseEntity<AppUserDto> addAppUser(@RequestBody AppUserDto appUserDto) {
+        AppUserDto result=appUserService.save(appUserDto);
+        return ResponseEntity.ok(result);
     }
 
     @GetMapping

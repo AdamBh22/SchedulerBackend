@@ -3,6 +3,7 @@ package beSoft.tn.SchedulerProject.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,11 +21,9 @@ public class Activity {
     @GeneratedValue
     private Integer id;
     private String name;
+    private Integer UserId;
     @JsonBackReference
-    @OneToOne
-    private AppUser user;
-    @JsonBackReference
-    @OneToOne
+    @ManyToOne
     private Task task;
 
     public Integer getId() {
@@ -43,19 +42,19 @@ public class Activity {
         this.name = name;
     }
 
-    public AppUser getUser() {
-        return user;
-    }
-
-    public void setUser(AppUser user) {
-        this.user = user;
-    }
-
     public Task getTask() {
         return task;
     }
 
     public void setTask(Task task) {
         this.task = task;
+    }
+
+    public Integer getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(Integer userId) {
+        UserId = userId;
     }
 }

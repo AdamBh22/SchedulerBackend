@@ -29,11 +29,9 @@ public class Task {
     private String status;
     private LocalDate starting;
     private LocalDate ending;
+    private Integer UserId;
     @JsonBackReference
-    @OneToOne
-    private AppUser assignedTo;
-    @JsonBackReference
-    @OneToOne
+    @ManyToOne
     private Project project;
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL)
@@ -103,14 +101,6 @@ public class Task {
         this.ending = ending;
     }
 
-    public AppUser getAssignedTo() {
-        return assignedTo;
-    }
-
-    public void setAssignedTo(AppUser assignedTo) {
-        this.assignedTo = assignedTo;
-    }
-
     public Project getProject() {
         return project;
     }
@@ -141,5 +131,13 @@ public class Task {
 
     public void setDependencies(List<Dependency> dependencies) {
         this.dependencies = dependencies;
+    }
+
+    public Integer getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(Integer userId) {
+        UserId = userId;
     }
 }

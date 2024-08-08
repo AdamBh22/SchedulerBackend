@@ -1,6 +1,5 @@
 package beSoft.tn.SchedulerProject.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.io.Serializable;
 import java.util.List;
 
 @Builder
@@ -30,22 +28,10 @@ public class AppUser {
 
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL)
-    private List<Task> tasks;
-
-    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Comment> comments;
-
-    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Activity> activities;
-
-    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL)
     private List<Recent> recents;
 
     @JsonManagedReference
-    @OneToMany
+    @ManyToMany
     private List<Project> projects;
 
     public Integer getId() {
@@ -88,29 +74,6 @@ public class AppUser {
         this.password = password;
     }
 
-    public List<Task> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
-    public List<Activity> getActivities() {
-        return activities;
-    }
-
-    public void setActivities(List<Activity> activities) {
-        this.activities = activities;
-    }
 
     public List<Recent> getRecents() {
         return recents;

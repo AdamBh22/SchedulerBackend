@@ -1,6 +1,7 @@
 package beSoft.tn.SchedulerProject.dto;
 
 import lombok.*;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -11,15 +12,13 @@ import java.util.List;
 //@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class AppUserDto{
     private Integer id;
     private String fullName;
     private String email;
     private String role;
     private String password;
-    private List<TaskDto> tasks;
-    private List<CommentDto> comments;
-    private List<ActivityDto> activities;
     private List<RecentDto> recents;
     private List<ProjectDto> projects;
     public Integer getId() {
@@ -60,30 +59,6 @@ public class AppUserDto{
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public List<TaskDto> getTasks() {
-        return tasks;
-    }
-
-    public void setTasks(List<TaskDto> tasks) {
-        this.tasks = tasks;
-    }
-
-    public List<CommentDto> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<CommentDto> comments) {
-        this.comments = comments;
-    }
-
-    public List<ActivityDto> getActivities() {
-        return activities;
-    }
-
-    public void setActivities(List<ActivityDto> activities) {
-        this.activities = activities;
     }
 
     public List<RecentDto> getRecents() {

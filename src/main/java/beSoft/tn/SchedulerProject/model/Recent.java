@@ -12,21 +12,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.time.LocalDate;
+
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EntityListeners(AuditingEntityListener.class)
 public class Recent {
     @Id
     @GeneratedValue
     private Integer id;
-    private String name;
-    @Enumerated(EnumType.STRING)
-    private RecentType type;
+    private String type;
+    private LocalDate date;
     @JsonBackReference
-    @OneToOne
+    @ManyToOne
     private AppUser user;
 
     public Integer getId() {
@@ -37,27 +37,27 @@ public class Recent {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public RecentType getType() {
-        return type;
-    }
-
-    public void setType(RecentType type) {
-        this.type = type;
-    }
-
     public AppUser getUser() {
         return user;
     }
 
     public void setUser(AppUser user) {
         this.user = user;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 }

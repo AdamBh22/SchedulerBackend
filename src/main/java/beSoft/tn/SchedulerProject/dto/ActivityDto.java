@@ -6,7 +6,7 @@ package beSoft.tn.SchedulerProject.dto;
 public class ActivityDto {
     private Integer id;
     private String name;
-    private AppUserDto user;
+    private Integer UserId;
     private TaskDto task;
 
     public Integer getId() {
@@ -24,10 +24,20 @@ public class ActivityDto {
     public void setName(String name) {
         this.name = name;
     }
-    public AppUserDto getUser() {
-        return user;
+
+    public TaskDto getTask() {
+        return task;
     }
-    public void setUser(AppUserDto user) {
-        this.user = user;
+
+    public void setTask(TaskDto task) {
+        this.task = task;
+    }
+
+    public Integer getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(Integer userId) {
+        UserId = userId;
     }
 }
