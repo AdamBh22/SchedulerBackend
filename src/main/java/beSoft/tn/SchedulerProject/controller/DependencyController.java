@@ -27,11 +27,11 @@ public class DependencyController {
     }
 
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public void deleteDependency(@PathVariable Integer id) {
         dependencyService.delete(id);
     }
-    @PutMapping("{/id}")
+    @PutMapping("{id}")
     public DependencyDto updateDependency(@PathVariable String Status, @RequestBody DependencyDto dependency) {
         return dependencyService.update(Status, dependency);
     }

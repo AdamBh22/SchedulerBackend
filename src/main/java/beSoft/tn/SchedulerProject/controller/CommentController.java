@@ -24,4 +24,8 @@ public class CommentController {
     public CommentDto getComment(@PathVariable Integer id) {
         return commentService.getById(id);
     }
+    @DeleteMapping("/{id}")
+    public void deleteComment(@PathVariable Integer id) {
+        commentService.delete(id);
+    }
 }

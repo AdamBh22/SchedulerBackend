@@ -22,6 +22,16 @@ public class Dependency {
     private Integer id;
     private String status;
     private Integer relatedTaskId;
+
+    public Integer getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(Integer userId) {
+        UserId = userId;
+    }
+
+    private Integer UserId;
     @JsonBackReference
     @ManyToOne
     private Task Task;

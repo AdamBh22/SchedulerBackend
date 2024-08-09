@@ -1,16 +1,25 @@
 package beSoft.tn.SchedulerProject.dto;
 
 
-
+import java.util.Date;
 
 public class ActivityDto {
     private Integer id;
     private String name;
     private Integer UserId;
     private TaskDto task;
+    private Date startTime;
 
     public Integer getId() {
         return id;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
     }
 
     public void setId(Integer id) {

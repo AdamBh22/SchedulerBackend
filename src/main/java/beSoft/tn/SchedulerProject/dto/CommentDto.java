@@ -13,7 +13,6 @@ public class CommentDto {
     private String text;
     private Integer userId;
     private TaskDto task;
-
     public Integer getId() {
         return id;
     }

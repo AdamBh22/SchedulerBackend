@@ -25,77 +25,12 @@ public class TaskDto {
     private List<ActivityDto> activities;
     private List<DependencyDto> dependencies;
 
-    public List<DependencyDto> getDependencies() {
-        return dependencies;
+    public Integer getId() {
+        return id;
     }
 
-    public void setDependencies(List<DependencyDto> dependencies) {
-        this.dependencies = dependencies;
-    }
-
-    public List<ActivityDto> getActivities() {
-        return activities;
-    }
-
-    public void setActivities(List<ActivityDto> activities) {
-        this.activities = activities;
-    }
-
-    public List<CommentDto> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<CommentDto> comments) {
-        this.comments = comments;
-    }
-
-    public ProjectDto getProject() {
-        return project;
-    }
-
-    public void setProject(ProjectDto project) {
-        this.project = project;
-    }
-
-
-    public LocalDate getEnding() {
-        return ending;
-    }
-
-    public void setEnding(LocalDate ending) {
-        this.ending = ending;
-    }
-
-    public LocalDate getStarting() {
-        return starting;
-    }
-
-    public void setStarting(LocalDate starting) {
-        this.starting = starting;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getPriority() {
-        return priority;
-    }
-
-    public void setPriority(String priority) {
-        this.priority = priority;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -106,12 +41,44 @@ public class TaskDto {
         this.name = name;
     }
 
-    public Integer getId() {
-        return id;
+    public String getPriority() {
+        return priority;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDate getStarting() {
+        return starting;
+    }
+
+    public void setStarting(LocalDate starting) {
+        this.starting = starting;
+    }
+
+    public LocalDate getEnding() {
+        return ending;
+    }
+
+    public void setEnding(LocalDate ending) {
+        this.ending = ending;
     }
 
     public Integer getUserId() {
@@ -120,5 +87,37 @@ public class TaskDto {
 
     public void setUserId(Integer userId) {
         UserId = userId;
+    }
+
+    public ProjectDto getProject() {
+        return project;
+    }
+
+    public void setProject(ProjectDto project) {
+        this.project = project;
+    }
+
+    public List<CommentDto> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentDto> comments) {
+        this.comments = comments;
+    }
+
+    public List<ActivityDto> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(List<ActivityDto> activities) {
+        this.activities = activities;
+    }
+
+    public List<DependencyDto> getDependencies() {
+        return dependencies;
+    }
+
+    public void setDependencies(List<DependencyDto> dependencies) {
+        this.dependencies = dependencies;
     }
 }

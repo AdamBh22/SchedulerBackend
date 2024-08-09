@@ -14,6 +14,16 @@ public class DependencyDto {
     private Integer relatedTaskId;
     private TaskDto task;
 
+    public Integer getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(Integer userId) {
+        UserId = userId;
+    }
+
+    private Integer UserId;
+
     public Integer getId() {
         return id;
     }

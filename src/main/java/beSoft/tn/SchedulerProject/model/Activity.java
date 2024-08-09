@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.util.Date;
+
 @Builder
 @Data
 @NoArgsConstructor
@@ -22,9 +24,20 @@ public class Activity {
     private Integer id;
     private String name;
     private Integer UserId;
+    private Date startTime;
     @JsonBackReference
     @ManyToOne
     private Task task;
+
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
 
     public Integer getId() {
         return id;

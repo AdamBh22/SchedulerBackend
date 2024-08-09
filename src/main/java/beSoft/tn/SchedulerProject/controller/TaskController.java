@@ -1,5 +1,8 @@
 package beSoft.tn.SchedulerProject.controller;
 
+import beSoft.tn.SchedulerProject.dto.ActivityDto;
+import beSoft.tn.SchedulerProject.dto.CommentDto;
+import beSoft.tn.SchedulerProject.dto.DependencyDto;
 import beSoft.tn.SchedulerProject.dto.TaskDto;
 import beSoft.tn.SchedulerProject.model.Task;
 import beSoft.tn.SchedulerProject.services.TaskService;
@@ -14,21 +17,42 @@ import java.util.List;
 public class TaskController {
     @Autowired
     TaskService taskService;
+
+
     @GetMapping
     public List<TaskDto> getAllTasks() {
         return taskService.getAllTasks();
     }
+
+
     @PostMapping
     public TaskDto createTask(@RequestBody TaskDto task) {
         return taskService.Save(task);
     }
+
     @GetMapping("/{id}")
     public TaskDto getTask(@PathVariable Integer id) {
         return taskService.getTaskById(id);
     }
 
+
     @DeleteMapping("/{id}")
     public void deleteTask(@PathVariable Integer id) {
         taskService.deleteTaskById(id);
+    }
+
+    @GetMapping("comments/{id}")
+    public List<CommentDto> getTaskComments(@PathVariable Integer id) {
+        return taskService.getAllCommentsByTaskId(id);
+    }
+
+    @GetMapping("dependencies/{id}")
+    public List<DependencyDto> getTaskDependencies(@PathVariable Integer id) {
+        return taskService.getAllDependenciesByTaskId(id);
+    }
+
+    @GetMapping("activities/{id}")
+    public List<ActivityDto> getTaskActivities(@PathVariable Integer id) {
+        return taskService.getAllActivitiesByTaskId(id);
     }
 }

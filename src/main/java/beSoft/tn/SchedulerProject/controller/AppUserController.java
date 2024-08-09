@@ -1,6 +1,8 @@
 package beSoft.tn.SchedulerProject.controller;
 
 import beSoft.tn.SchedulerProject.dto.AppUserDto;
+import beSoft.tn.SchedulerProject.dto.ProjectDto;
+import beSoft.tn.SchedulerProject.dto.RecentDto;
 import beSoft.tn.SchedulerProject.services.AppUserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +34,15 @@ public class AppUserController {
     @GetMapping(value = "/{id}")
     public AppUserDto getAppUser(@PathVariable Integer id) {
         return appUserService.findAppUserById(id);
+    }
+
+    @GetMapping("/projects/{id}")
+    public List<ProjectDto> getAppUserProjects(@PathVariable Integer id) {
+        return appUserService.getProjectsByUserId(id);
+    }
+
+    @GetMapping("/recents/id")
+    public List<RecentDto> getAppUserRecents(@PathVariable Integer id) {
+        return appUserService.getRecentsByUserId(id);
     }
 }

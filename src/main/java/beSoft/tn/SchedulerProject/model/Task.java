@@ -138,6 +138,6 @@ public class Task {
     }
 
     public void setUserId(Integer userId) {
-        UserId = userId;
+        this.UserId = userId;
     }
 }

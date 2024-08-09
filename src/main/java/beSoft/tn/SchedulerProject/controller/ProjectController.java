@@ -1,6 +1,7 @@
 package beSoft.tn.SchedulerProject.controller;
 
 import beSoft.tn.SchedulerProject.dto.ProjectDto;
+import beSoft.tn.SchedulerProject.dto.TaskDto;
 import beSoft.tn.SchedulerProject.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -30,5 +31,10 @@ public class ProjectController {
     @DeleteMapping("/{id}")
     public void deleteProject(@PathVariable Integer id) {
         projectService.delete(id);
+    }
+
+    @GetMapping("/tasks/{id}")
+    public List<TaskDto> getTasks(@PathVariable Integer id) {
+        return projectService.findTasksById(id);
     }
 }
