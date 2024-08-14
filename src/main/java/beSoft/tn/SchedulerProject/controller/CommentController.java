@@ -28,4 +28,8 @@ public class CommentController {
     public void deleteComment(@PathVariable Integer id) {
         commentService.delete(id);
     }
+    @PutMapping("/{id}")
+    public CommentDto updateComment(@PathVariable Integer id, @RequestBody CommentDto comment) {
+        return commentService.update(id, comment);
+    }
 }

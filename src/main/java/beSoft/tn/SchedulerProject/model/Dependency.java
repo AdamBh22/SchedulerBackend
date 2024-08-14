@@ -2,12 +2,10 @@ package beSoft.tn.SchedulerProject.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 
 @Builder
@@ -15,13 +13,19 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EntityListeners(AuditingEntityListener.class)
+@Table(name = "Dependency")
 public class Dependency {
     @Id
     @GeneratedValue
     private Integer id;
     private String status;
     private Integer relatedTaskId;
+    private Integer UserId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id")
+    private Task task;
+
 
     public Integer getUserId() {
         return UserId;
@@ -30,11 +34,6 @@ public class Dependency {
     public void setUserId(Integer userId) {
         UserId = userId;
     }
-
-    private Integer UserId;
-    @JsonBackReference
-    @ManyToOne
-    private Task Task;
 
     public Integer getId() {
         return id;
@@ -61,10 +60,10 @@ public class Dependency {
     }
 
     public beSoft.tn.SchedulerProject.model.Task getTask() {
-        return Task;
+        return task;
     }
 
     public void setTask(beSoft.tn.SchedulerProject.model.Task task) {
-        Task = task;
+        this.task = task;
     }
 }

@@ -1,6 +1,5 @@
 package beSoft.tn.SchedulerProject.model;
 
-import beSoft.tn.SchedulerProject.dto.RecentType;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
@@ -10,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDate;
 
@@ -19,14 +17,16 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "recent")
 public class Recent {
     @Id
     @GeneratedValue
     private Integer id;
     private String type;
     private LocalDate date;
+    @ManyToOne(fetch = FetchType.LAZY)
     @JsonBackReference
-    @ManyToOne
+    @JoinColumn(name = "user_id")
     private AppUser user;
 
     public Integer getId() {

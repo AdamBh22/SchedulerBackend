@@ -1,9 +1,6 @@
 package beSoft.tn.SchedulerProject.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Table(name="Activity")
 public class Activity {
     @Id
     @GeneratedValue
@@ -25,8 +23,8 @@ public class Activity {
     private String name;
     private Integer UserId;
     private Date startTime;
-    @JsonBackReference
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id")
     private Task task;
 
 

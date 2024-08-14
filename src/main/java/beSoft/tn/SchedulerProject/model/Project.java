@@ -1,7 +1,6 @@
 package beSoft.tn.SchedulerProject.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -17,18 +16,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@EntityListeners(AuditingEntityListener.class)
+@Table(name="Project")
 public class Project {
     @Id
     @GeneratedValue
     private Integer id;
     private String name;
-    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "project",fetch = FetchType.LAZY)
     private List<Task> tasks;
-    @JsonManagedReference
-    @ManyToMany
-    private List<AppUser> users;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "project",fetch = FetchType.LAZY)
+    private List<AppUserProject> appUserProjects;
 
     public Integer getId() {
         return id;
@@ -54,11 +51,11 @@ public class Project {
         this.tasks = tasks;
     }
 
-    public List<AppUser> getUsers() {
-        return users;
+    public List<AppUserProject> getAppUserProjects() {
+        return appUserProjects;
     }
 
-    public void setUsers(List<AppUser> users) {
-        this.users = users;
+    public void setAppUserProjects(List<AppUserProject> appUserProjects) {
+        this.appUserProjects = appUserProjects;
     }
 }

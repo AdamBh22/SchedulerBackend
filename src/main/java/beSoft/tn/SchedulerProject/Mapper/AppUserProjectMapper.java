@@ -1,17 +1,16 @@
 package beSoft.tn.SchedulerProject.Mapper;
 
+import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 import beSoft.tn.SchedulerProject.dto.*;
 import beSoft.tn.SchedulerProject.model.*;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ProjectMapper {
+public class AppUserProjectMapper {
     public AppUserProject appUserProjectDtoToAppUserProject(AppUserProjectDto dto) {
         if ( dto == null ) {
             return null;
@@ -34,7 +33,7 @@ public class ProjectMapper {
 
         appUserProjectDto.setId( appUserProject.getId() );
         appUserProjectDto.setUser( appUserToAppUserDto( appUserProject.getUser() ) );
-        appUserProjectDto.setProject( null );
+        appUserProjectDto.setProject( projectToProjectDto( appUserProject.getProject() ) );
 
         return appUserProjectDto;
     }
@@ -95,7 +94,7 @@ public class ProjectMapper {
         appUserDto.setEmail( appUser.getEmail() );
         appUserDto.setRole( appUser.getRole() );
         appUserDto.setPassword( appUser.getPassword() );
-        appUserDto.setRecents( null );
+        appUserDto.setRecents( null);
         appUserDto.setAppUserProjects(null);
         return appUserDto;
     }
@@ -150,8 +149,8 @@ public class ProjectMapper {
 
         projectDto.setId( project.getId() );
         projectDto.setName( project.getName() );
-        projectDto.setTasks( taskListToTaskDtoList( project.getTasks() ) );
-        projectDto.setAppUserProjects( appUserProjectListToAppUserProjectList( project.getAppUserProjects() ) );
+        projectDto.setTasks(null );
+        projectDto.setAppUserProjects( null );
 
         return projectDto;
     }
@@ -448,10 +447,10 @@ public class ProjectMapper {
         taskDto.setStarting( task.getStarting() );
         taskDto.setEnding( task.getEnding() );
         taskDto.setUserId( task.getUserId() );
-        taskDto.setProject( null );
-        taskDto.setComments( null );
-        taskDto.setActivities( null );
-        taskDto.setDependencies( null );
+        taskDto.setProject( projectToProjectDto( task.getProject() ) );
+        taskDto.setComments( commentListToCommentDtoList( task.getComments() ) );
+        taskDto.setActivities( activityListToActivityDtoList( task.getActivities() ) );
+        taskDto.setDependencies( dependencyListToDependencyDtoList( task.getDependencies() ) );
 
         return taskDto;
     }

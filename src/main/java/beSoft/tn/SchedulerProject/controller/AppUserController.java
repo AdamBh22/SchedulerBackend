@@ -2,9 +2,8 @@ package beSoft.tn.SchedulerProject.controller;
 
 import beSoft.tn.SchedulerProject.dto.AppUserDto;
 import beSoft.tn.SchedulerProject.dto.ProjectDto;
-import beSoft.tn.SchedulerProject.dto.RecentDto;
+import beSoft.tn.SchedulerProject.dto.TaskDto;
 import beSoft.tn.SchedulerProject.services.AppUserService;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,6 @@ public class AppUserController {
     AppUserService appUserService;
 
     @PostMapping( "/add")
-    //@ResponseBody
     public ResponseEntity<AppUserDto> addAppUser(@RequestBody AppUserDto appUserDto) {
         AppUserDto result=appUserService.save(appUserDto);
         return ResponseEntity.ok(result);
@@ -36,13 +34,19 @@ public class AppUserController {
         return appUserService.findAppUserById(id);
     }
 
-    @GetMapping("/projects/{id}")
+    @GetMapping(value = "/projectsByUser/{id}")
     public List<ProjectDto> getAppUserProjects(@PathVariable Integer id) {
-        return appUserService.getProjectsByUserId(id);
+        return appUserService.findAllProjects(id);
     }
 
-    @GetMapping("/recents/id")
-    public List<RecentDto> getAppUserRecents(@PathVariable Integer id) {
-        return appUserService.getRecentsByUserId(id);
+    @GetMapping(value = "/tasks/{id}")
+    public List<TaskDto> getAppUserTasks(@PathVariable Integer id) {
+        return appUserService.findAllTasks(id);
     }
+
+    @PutMapping(value = "/{id}")
+    public AppUserDto updateAppUser(@PathVariable Integer id, @RequestBody AppUserDto appUserDto) {
+        return appUserService.updateAppUser(id, appUserDto);
+    }
+
 }

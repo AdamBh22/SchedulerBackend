@@ -14,14 +14,15 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Table(name="Comment")
 public class Comment {
     @Id
     @GeneratedValue
     private Integer id;
     private String text;
     private Integer userId;
-    @JsonBackReference
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id")
     private Task task;
 
     public Integer getId() {

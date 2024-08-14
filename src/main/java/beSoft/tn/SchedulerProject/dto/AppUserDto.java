@@ -1,5 +1,7 @@
 package beSoft.tn.SchedulerProject.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,7 @@ public class AppUserDto{
     private String role;
     private String password;
     private List<RecentDto> recents;
-    private List<ProjectDto> projects;
+    private List<AppUserProjectDto> appUserProjects;
     public Integer getId() {
         return id;
     }
@@ -69,11 +71,11 @@ public class AppUserDto{
         this.recents = recents;
     }
 
-    public List<ProjectDto> getProjects() {
-        return projects;
+    public List<AppUserProjectDto> getAppUserProjects() {
+        return appUserProjects;
     }
 
-    public void setProjects(List<ProjectDto> projects) {
-        this.projects = projects;
+    public void setAppUserProjects(List<AppUserProjectDto> appUserProjects) {
+        this.appUserProjects = appUserProjects;
     }
 }

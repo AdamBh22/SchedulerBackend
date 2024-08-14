@@ -1,6 +1,7 @@
 package beSoft.tn.SchedulerProject.controller;
 
 import beSoft.tn.SchedulerProject.dto.ActivityDto;
+import beSoft.tn.SchedulerProject.dto.AppUserDto;
 import beSoft.tn.SchedulerProject.services.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -23,5 +24,9 @@ public class ActivityController {
     @GetMapping("/{id}")
     public ActivityDto getActivity(@PathVariable Integer id) {
         return activityService.findById(id);
+    }
+    @GetMapping("/user/{id}")
+    public AppUserDto getUser(@PathVariable Integer id) {
+        return activityService.findAppUserById(id);
     }
 }

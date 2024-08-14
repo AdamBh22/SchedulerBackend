@@ -19,9 +19,11 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @EntityListeners(AuditingEntityListener.class)
+@Table(name = "Task")
 public class Task {
     @Id
     @GeneratedValue
+    @Column(name = "task_id")
     private Integer id;
     private String name;
     private String priority;
@@ -29,18 +31,15 @@ public class Task {
     private String status;
     private LocalDate starting;
     private LocalDate ending;
-    private Integer UserId;
-    @JsonBackReference
-    @ManyToOne
+    private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
     private Project project;
-    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "task",fetch = FetchType.LAZY)
     private List<Comment> comments;
-    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "task",fetch = FetchType.LAZY)
     private List<Activity> activities;
-    @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Dependency> dependencies;
 
 
@@ -134,10 +133,10 @@ public class Task {
     }
 
     public Integer getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(Integer userId) {
-        this.UserId = userId;
+        this.userId = userId;
     }
 }

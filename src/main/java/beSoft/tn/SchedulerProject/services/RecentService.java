@@ -14,20 +14,22 @@ import java.util.stream.Collectors;
 public class RecentService {
     @Autowired
     RecentRepository recentRepository;
+    @Autowired
+    RecentMapper recentMapper;
 
     public List<RecentDto> getAllRecents() {
         List<Recent> recents = recentRepository.findAll();
-        return recents.stream().map(RecentMapper.INSTANCE::recentToRecentDto).toList();
+        return recents.stream().map(recentMapper::recentToRecentDto).toList();
     }
 
     public RecentDto getRecentById(Integer id) {
         Recent recent= recentRepository.findById(id).orElse(null);
-        return RecentMapper.INSTANCE.recentToRecentDto(recent);
+        return recentMapper.recentToRecentDto(recent);
     }
 
     public RecentDto saveRecent(RecentDto recentDto) {
-        Recent recent1=RecentMapper.INSTANCE.recentDtoToRecent(recentDto);
+        Recent recent1=recentMapper.recentDtoToRecent(recentDto);
         Recent recent= recentRepository.save(recent1);
-        return RecentMapper.INSTANCE.recentToRecentDto(recent);
+        return recentMapper.recentToRecentDto(recent);
     }
 }

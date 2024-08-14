@@ -1,17 +1,13 @@
 package beSoft.tn.SchedulerProject.services;
 
-import beSoft.tn.SchedulerProject.Mapper.ActivityMapper;
-import beSoft.tn.SchedulerProject.Mapper.CommentMapper;
-import beSoft.tn.SchedulerProject.Mapper.DependencyMapper;
-import beSoft.tn.SchedulerProject.Mapper.TaskMapper;
+import beSoft.tn.SchedulerProject.Mapper.*;
 import beSoft.tn.SchedulerProject.dto.*;
 import beSoft.tn.SchedulerProject.model.*;
-import beSoft.tn.SchedulerProject.repository.ActivityRepository;
+import beSoft.tn.SchedulerProject.repository.AppUserRepository;
 import beSoft.tn.SchedulerProject.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -25,30 +21,47 @@ public class TaskService {
     @Autowired
     ActivityService activityService;
 
+    @Autowired
+    TaskMapper taskMapper;
+
+    @Autowired
+    ActivityMapper activityMapper;
+
+    @Autowired
+    CommentMapper commentMapper;
+
+    @Autowired
+    DependencyMapper dependencyMapper;
+
+    @Autowired
+    AppUserMapper appUserMapper;
+
+    @Autowired
+    AppUserRepository appUserRepository;
+
     public List<TaskDto> getAllTasks() {
         List<Task> tasks = taskRepository.findAll();
-        return tasks.stream().map(TaskMapper.INSTANCE::taskToTaskDto).toList();
+        return tasks.stream().map(taskMapper::taskToTaskDto).toList();
     }
 
     public TaskDto getTaskById(Integer id) {
         Task task = taskRepository.findById(id).orElse(null);
-        return TaskMapper.INSTANCE.taskToTaskDto(task);
+        return taskMapper.taskToTaskDto(task);
     }
 
 
     public TaskDto Save(TaskDto taskDto) {
-        Task task = TaskMapper.INSTANCE.taskDtoToTask(taskDto);
+        Task task = taskMapper.taskDtoToTask(taskDto);
         Task savedTask = taskRepository.save(task);
 
         ActivityDto activityDto = new ActivityDto();
-        activityDto.setTask(TaskMapper.INSTANCE.taskToTaskDto(savedTask));
+        activityDto.setTask(taskMapper.taskToTaskDto(savedTask));
         activityDto.setUserId(savedTask.getUserId());
         activityDto.setName("_CREATE_TASK_");
         activityDto.setStartTime(new Date());
-        ActivityDto activity=activityService.save(activityDto);
+        activityService.save(activityDto);
 
-        savedTask.setActivities(Collections.singletonList(TaskMapper.INSTANCE.activityDtoToActivity(activity)));
-        return TaskMapper.INSTANCE.taskToTaskDto(savedTask);
+        return taskMapper.taskToTaskDto(savedTask);
     }
 
     public void deleteTaskById(Integer id) {
@@ -57,22 +70,13 @@ public class TaskService {
 
 
 
-    public TaskDto updateStatus(TaskDto taskDto, String Status) {
-        if (taskDto == null) {
-            return null;
-        }
-        Task task = TaskMapper.INSTANCE.taskDtoToTask(taskDto);
-        task.setStatus(Status);
-        return TaskMapper.INSTANCE.taskToTaskDto(taskRepository.save(task));
-    }
-
     public List<ActivityDto> getAllActivitiesByTaskId(Integer taskId) {
         Task task = taskRepository.findById(taskId).orElse(null);
         if (task == null || task.getActivities() == null || task.getActivities().isEmpty()) {
             return Collections.emptyList();
         }
         List<Activity> activities = task.getActivities();
-        return activities.stream().map(ActivityMapper.INSTANCE::activityToActivityDto).collect(Collectors.toList());
+        return activities.stream().map(activityMapper::activityToActivityDto).collect(Collectors.toList());
     }
 
     public List<CommentDto> getAllCommentsByTaskId(Integer taskId) {
@@ -82,7 +86,7 @@ public class TaskService {
         }
         List<Comment> comments = task.getComments();
         return comments.stream()
-                .map(CommentMapper.INSTANCE::commentToCommentDto)
+                .map(commentMapper::commentToCommentDto)
                 .collect(Collectors.toList());
     }
 
@@ -93,6 +97,29 @@ public class TaskService {
             return Collections.emptyList();
         }
         List<Dependency> dependencies = task.getDependencies();
-        return dependencies.stream().map(DependencyMapper.INSTANCE::dependencyToDependencyDto).collect(Collectors.toList());
+        return dependencies.stream().map(dependencyMapper::dependencyToDependencyDto).collect(Collectors.toList());
+    }
+
+
+    public AppUserDto getUser(Integer taskId){
+        Task task = taskRepository.findById(taskId).orElse(null);
+        Integer userId = task.getUserId();
+        AppUser appUser = appUserRepository.findById(userId).orElse(null);
+        return appUserMapper.appUserToAppUserDto(appUser);
+    }
+
+    public TaskDto update(TaskDto taskDto, Integer taskId) {
+        taskDto.setId(taskId);
+        Task task=taskMapper.taskDtoToTask(taskDto);
+        Task savedTask = taskRepository.save(task);
+
+        ActivityDto activityDto = new ActivityDto();
+        activityDto.setTask(taskMapper.taskToTaskDto(savedTask));
+        activityDto.setUserId(savedTask.getUserId());
+        activityDto.setName("_UPDATE_TASK_");
+        activityDto.setStartTime(new Date());
+        activityService.save(activityDto);
+
+        return taskMapper.taskToTaskDto(savedTask);
     }
 }

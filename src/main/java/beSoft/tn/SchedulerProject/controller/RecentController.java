@@ -16,9 +16,7 @@ public class RecentController {
     RecentService recentService;
     @PostMapping
     public RecentDto addRecent(@RequestBody RecentDto recent) {
-        RecentDto result=recentService.saveRecent(recent);
-        RecentDto result1=result;
-        return result1;
+        return recentService.saveRecent(recent);
     }
     @GetMapping
     public List<RecentDto> getAllRecents() {

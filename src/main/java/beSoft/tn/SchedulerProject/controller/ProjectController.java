@@ -1,5 +1,6 @@
 package beSoft.tn.SchedulerProject.controller;
 
+import beSoft.tn.SchedulerProject.dto.AppUserDto;
 import beSoft.tn.SchedulerProject.dto.ProjectDto;
 import beSoft.tn.SchedulerProject.dto.TaskDto;
 import beSoft.tn.SchedulerProject.services.ProjectService;
@@ -36,5 +37,14 @@ public class ProjectController {
     @GetMapping("/tasks/{id}")
     public List<TaskDto> getTasks(@PathVariable Integer id) {
         return projectService.findTasksById(id);
+    }
+
+    @GetMapping("/usersByProject/{id}")
+    public List<AppUserDto> getUsers(@PathVariable Integer id) {
+        return projectService.findUsersByProjectId(id);
+    }
+    @PutMapping("/{id}")
+    public ProjectDto updateProject(@PathVariable Integer id, @RequestBody ProjectDto project) {
+        return projectService.update(project, id);
     }
 }

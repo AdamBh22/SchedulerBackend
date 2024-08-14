@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.util.List;
 
@@ -15,10 +14,11 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 @Entity
-@EntityListeners(AuditingEntityListener.class)
+@Table(name = "app_user")
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "app_user_id")
     private Integer id;
     private String fullName;
     @Column(unique = true)
@@ -26,13 +26,12 @@ public class AppUser {
     private String role;
     private String password;
 
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user",fetch = FetchType.LAZY)
     @JsonManagedReference
-    @OneToMany(cascade = CascadeType.ALL)
     private List<Recent> recents;
 
-    @JsonManagedReference
-    @ManyToMany
-    private List<Project> projects;
+    @OneToMany(mappedBy = "user")
+    private List<AppUserProject> appUserProject;
 
     public Integer getId() {
         return id;
@@ -83,11 +82,10 @@ public class AppUser {
         this.recents = recents;
     }
 
-    public List<Project> getProjects() {
-        return projects;
+    public List<AppUserProject> getAppUserProject() {
+        return appUserProject;
     }
-
-    public void setProjects(List<Project> projects) {
-        this.projects = projects;
+    public void setAppUserProject(List<AppUserProject> appUserProject) {
+        this.appUserProject = appUserProject;
     }
 }

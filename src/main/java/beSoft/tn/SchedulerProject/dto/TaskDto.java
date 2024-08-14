@@ -1,5 +1,6 @@
 package beSoft.tn.SchedulerProject.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TaskDto {
     private Integer id;
     private String name;
@@ -19,7 +21,7 @@ public class TaskDto {
     private String status;
     private LocalDate starting;
     private LocalDate ending;
-    private Integer UserId;
+    private Integer userId;
     private ProjectDto project;
     private List<CommentDto> comments;
     private List<ActivityDto> activities;
@@ -82,11 +84,11 @@ public class TaskDto {
     }
 
     public Integer getUserId() {
-        return UserId;
+        return userId;
     }
 
     public void setUserId(Integer userId) {
-        UserId = userId;
+        this.userId = userId;
     }
 
     public ProjectDto getProject() {

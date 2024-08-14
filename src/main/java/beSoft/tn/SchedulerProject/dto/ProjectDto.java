@@ -1,6 +1,7 @@
 package beSoft.tn.SchedulerProject.dto;
 
 import beSoft.tn.SchedulerProject.model.AppUser;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,10 +13,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class ProjectDto {
     private Integer id;
     private String name;
-    private List<AppUserDto> users;
+    private List<AppUserProjectDto> appUserProjects;
     private List<TaskDto> tasks;
 
     public Integer getId() {
@@ -42,11 +44,11 @@ public class ProjectDto {
         this.tasks = tasks;
     }
 
-    public List<AppUserDto> getUsers() {
-        return users;
+    public List<AppUserProjectDto> getAppUserProjects() {
+        return appUserProjects;
     }
 
-    public void setUsers(List<AppUserDto> users) {
-        this.users = users;
+    public void setAppUserProjects(List<AppUserProjectDto> appUserProjects) {
+        this.appUserProjects = appUserProjects;
     }
 }

@@ -1,9 +1,6 @@
 package beSoft.tn.SchedulerProject.controller;
 
-import beSoft.tn.SchedulerProject.dto.ActivityDto;
-import beSoft.tn.SchedulerProject.dto.CommentDto;
-import beSoft.tn.SchedulerProject.dto.DependencyDto;
-import beSoft.tn.SchedulerProject.dto.TaskDto;
+import beSoft.tn.SchedulerProject.dto.*;
 import beSoft.tn.SchedulerProject.model.Task;
 import beSoft.tn.SchedulerProject.services.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +51,15 @@ public class TaskController {
     @GetMapping("activities/{id}")
     public List<ActivityDto> getTaskActivities(@PathVariable Integer id) {
         return taskService.getAllActivitiesByTaskId(id);
+    }
+
+    @GetMapping("user/{id}")
+    public AppUserDto getTaskUser(@PathVariable Integer id) {
+        return taskService.getUser(id);
+    }
+
+    @PutMapping("/{id}")
+    public TaskDto updateTask(@PathVariable Integer id, @RequestBody TaskDto task) {
+        return taskService.update(task,id);
     }
 }

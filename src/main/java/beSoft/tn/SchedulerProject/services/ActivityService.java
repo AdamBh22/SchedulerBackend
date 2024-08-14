@@ -1,9 +1,12 @@
 package beSoft.tn.SchedulerProject.services;
 
 import beSoft.tn.SchedulerProject.Mapper.ActivityMapper;
+import beSoft.tn.SchedulerProject.Mapper.AppUserMapper;
+import beSoft.tn.SchedulerProject.Mapper.TaskMapper;
 import beSoft.tn.SchedulerProject.dto.*;
 import beSoft.tn.SchedulerProject.model.*;
 import beSoft.tn.SchedulerProject.repository.ActivityRepository;
+import beSoft.tn.SchedulerProject.repository.AppUserRepository;
 import beSoft.tn.SchedulerProject.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,10 +22,18 @@ public class ActivityService {
     ActivityRepository activityRepository;
     @Autowired
     TaskRepository taskRepository;
+    @Autowired
+    TaskMapper taskMapper;
+    @Autowired
+    ActivityMapper activityMapper;
+    @Autowired
+    AppUserRepository appUserRepository;
+    @Autowired
+    AppUserMapper appUserMapper;
 
     public ActivityDto save(ActivityDto activityDto) {
 
-        Activity activity = ActivityMapper.INSTANCE.activityDtoToActivity(activityDto);
+        Activity activity = activityMapper.activityDtoToActivity(activityDto);
         Activity savedActivity = activityRepository.save(activity);
 
         Task associatedTask = savedActivity.getTask();
@@ -34,40 +45,22 @@ public class ActivityService {
             taskRepository.save(associatedTask);
         }
 
-        return ActivityMapper.INSTANCE.activityToActivityDto(savedActivity);
+        return activityMapper.activityToActivityDto(savedActivity);
     }
 
     public ActivityDto findById(Integer id) {
         Activity result = activityRepository.findById(id).orElse(null);
-        return ActivityMapper.INSTANCE.activityToActivityDto(result);
+        return activityMapper.activityToActivityDto(result);
     }
 
     public List<ActivityDto> findAll() {
         List<Activity> activities = activityRepository.findAll();
-        return activities.stream().map(ActivityMapper.INSTANCE::activityToActivityDto).collect(Collectors.toList());
+        return activities.stream().map(activityMapper::activityToActivityDto).collect(Collectors.toList());
     }
 
-    public ActivityDto updateId(ActivityDto activityDto, Integer id) {
-        if (activityDto == null) {
-            return null;
-        }
-        activityDto.setId(id);
-        Activity activity = ActivityMapper.INSTANCE.activityDtoToActivity(activityDto);
-        Activity savedActivity = activityRepository.save(activity);
-        return ActivityMapper.INSTANCE.activityToActivityDto(savedActivity);
-    }
-
-    public void deleteById(Integer id) {
-        activityRepository.deleteById(id);
-    }
-
-    public ActivityDto updateName(ActivityDto activityDto, String name) {
-        if (activityDto == null) {
-            return null;
-        }
-        activityDto.setName(name);
-        Activity activity = ActivityMapper.INSTANCE.activityDtoToActivity(activityDto);
-        Activity savedActivity = activityRepository.save(activity);
-        return ActivityMapper.INSTANCE.activityToActivityDto(savedActivity);
+    public AppUserDto findAppUserById(Integer id) {
+        Activity activity = activityRepository.findById(id).orElse(null);
+        AppUser appUser = appUserRepository.findById(activity.getUserId()).orElse(null);
+        return appUserMapper.appUserToAppUserDto(appUser);
     }
 }
