@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import java.util.Collections;
 import java.util.List;
 
 @Builder
@@ -15,7 +15,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "app_user")
-public class AppUser {
+public class AppUser{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "app_user_id")
@@ -88,4 +88,5 @@ public class AppUser {
     public void setAppUserProject(List<AppUserProject> appUserProject) {
         this.appUserProject = appUserProject;
     }
+
 }

@@ -1,0 +1,29 @@
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/scheduler
+    driver-class-name:  org.postgresql.Driver
+    username: keycloak
+    password: keycloak
+  jpa:
+    show-sql: true
+    open-in-view: true
+    hibernate:
+      ddl-auto: create
+  security:
+    oauth2:
+      client:
+        registration:
+          scheduler:
+            client-id: scheduler-back
+            client-secret: bNgmWIwY3y6aeE7ELrkWiFahHJpiy5fW
+            provider: keycloak
+            scope: openid, profile, email
+            authorization-grant-type: client_credentials
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8081/realms/scheduler
+            token-uri: http://localhost:8081/realms/scheduler/protocol/openid-connect/token
+            authorization-uri: http://localhost:8081/realms/scheduler/protocol/openid-connect
+            user-info-uri: http://localhost:8081/realms/scheduler/protocol/openid-connect/userinfo
+            jwk-set-uri: http://localhost:8081/realms/scheduler/protocol/openid-connect/certs
