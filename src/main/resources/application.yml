@@ -1,8 +1,7 @@
-
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/scheduler
-    driver-class-name:  org.postgresql.Driver
+    driver-class-name: org.postgresql.Driver
     username: keycloak
     password: keycloak
   jpa:
@@ -24,6 +23,22 @@ spring:
           keycloak:
             issuer-uri: http://localhost:8081/realms/scheduler
             token-uri: http://localhost:8081/realms/scheduler/protocol/openid-connect/token
-            authorization-uri: http://localhost:8081/realms/scheduler/protocol/openid-connect
+            authorization-uri: http://localhost:8081/realms/scheduler/protocol/openid-connect/auth
             user-info-uri: http://localhost:8081/realms/scheduler/protocol/openid-connect/userinfo
             jwk-set-uri: http://localhost:8081/realms/scheduler/protocol/openid-connect/certs
+
+keycloak:
+  auth-server-url: http://localhost:8081/auth
+  realm: scheduler
+  resource: scheduler-back
+  credentials:
+    secret: bNgmWIwY3y6aeE7ELrkWiFahHJpiy5fW
+
+keycloak-admin:
+  username: admin
+  password: admin-password
+
+logging:
+  level:
+    org.keycloak: DEBUG
+    org.springframework.security: DEBUG

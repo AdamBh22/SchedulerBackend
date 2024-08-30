@@ -69,4 +69,9 @@ public class DependencyService {
         Task task=taskRepository.findById(dependency.getRelatedTaskId()).orElse(null);
         return taskMapper.taskToTaskDto(task);
     }
+
+    public DependencyDto getDependencyByTaskId(Integer taskId) {
+        return dependencyMapper.dependencyToDependencyDto(dependencyRepository.findById(taskId).orElse(null));
+    }
+
 }

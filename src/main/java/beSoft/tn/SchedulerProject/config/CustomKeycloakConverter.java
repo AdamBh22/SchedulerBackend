@@ -26,7 +26,7 @@ public class CustomKeycloakConverter implements Converter<Jwt, AbstractAuthentic
         Collection<GrantedAuthority> authorities = extractAuthorities(jwt.getClaims());
         return new JwtAuthenticationToken(jwt, authorities);
     }
-
+    // we have extract the authorities from the jwt and we have returned a JwtAuthentication using the jwt and the extracted authorities
     private Collection<GrantedAuthority> extractAuthorities(Map<String, Object> claims) {
         if (!claims.containsKey(REALM_ROLES_CLAIM_NAME) && !claims.containsKey(CLIENT_ROLES_CLAIM_NAME) && !claims.containsKey(GROUPS_CLAIM_NAME)) {
             return Collections.emptyList();
@@ -38,6 +38,8 @@ public class CustomKeycloakConverter implements Converter<Jwt, AbstractAuthentic
         realmAuthorities.addAll(groups);
         return realmAuthorities;
     }
+
+    // we try here to extract the Authorities from the claims given by the jwt
 
     private Collection<GrantedAuthority> extractRealmAuthorities(Map<String, Object> claims) {
         if (!claims.containsKey(REALM_ROLES_CLAIM_NAME)) {
@@ -52,6 +54,8 @@ public class CustomKeycloakConverter implements Converter<Jwt, AbstractAuthentic
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
+
+    // we try to extract the realm claims which are with "realm_access"
 
     private Collection<GrantedAuthority> extractClientAuthorities(Map<String, Object> claims) {
         Collection<GrantedAuthority> clientAuthorities = new ArrayList<>();
@@ -72,6 +76,7 @@ public class CustomKeycloakConverter implements Converter<Jwt, AbstractAuthentic
         return clientAuthorities;
     }
 
+    // we try to extract the realm claims which are with "roles"
     public Collection<GrantedAuthority> extractGroups(Map<String, Object> claims) {
         if (!claims.containsKey(GROUPS_CLAIM_NAME)) {
             return Collections.emptyList();
@@ -81,4 +86,6 @@ public class CustomKeycloakConverter implements Converter<Jwt, AbstractAuthentic
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
     }
+    // we try to extract the realm claims which are with "groups"
+
 }

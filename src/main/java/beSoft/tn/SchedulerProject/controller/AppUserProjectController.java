@@ -14,14 +14,17 @@ public class AppUserProjectController {
     @Autowired
     private AppUserProjectService appUserProjectService;
 
+    @CrossOrigin(origins = "http://localhost:4201")
     @GetMapping
     public List<AppUserProjectDto> getAllUserProjects() {
         return  appUserProjectService.findAll();
     }
+    @CrossOrigin(origins = "http://localhost:4201")
     @GetMapping("/{id}")
     public AppUserProjectDto getUserProject(@PathVariable Integer id) {
         return appUserProjectService.findById(id);
     }
+    @CrossOrigin(origins = "http://localhost:4201")
     @PostMapping
     public AppUserProjectDto createUserProject(@RequestBody AppUserProjectDto appUserProjectDto) {
         return appUserProjectService.save(appUserProjectDto);

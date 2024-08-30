@@ -21,6 +21,7 @@ public class AppUser{
     @Column(name = "app_user_id")
     private Integer id;
     private String fullName;
+
     @Column(unique = true)
     private String email;
     private String role;
