@@ -32,4 +32,11 @@ public class RecentService {
         Recent recent= recentRepository.save(recent1);
         return recentMapper.recentToRecentDto(recent);
     }
+
+    public List<RecentDto> getRecentByUserId(Integer userId) {
+        List<Recent> recents = recentRepository.findByUserId(userId);
+        return recents.stream()
+                .map(recentMapper::recentToRecentDto)
+                .collect(Collectors.toList());
+    }
 }

@@ -24,7 +24,7 @@ public class SecurityConfiguration  {
 
     @Value("${spring.security.oauth2.client.provider.keycloak.jwk-set-uri}")
     private String jwkSetUri;
-
+    //here we take the token from this path
     @Bean
     public CustomKeycloakConverter customKeycloakConverter() {
         return new CustomKeycloakConverter();
@@ -34,12 +34,13 @@ public class SecurityConfiguration  {
     public JwtDecoder decode() {
         return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
     }
+    //we create a decoder from this jwtSetUri
 
     @Bean
     public JwtAuthenticationProvider jwtAuthenticationProvider() {
         return new JwtAuthenticationProvider(decode());
     }
-
+    //we create a new a JwtAuthenticationProvider
     @Bean("securityFilterChain")
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, HandlerMappingIntrospector introspector) throws Exception {
         MvcRequestMatcher.Builder mvcMatcherBuilder =
@@ -59,6 +60,12 @@ public class SecurityConfiguration  {
         ;
         return httpSecurity.build();
     }
+
+    // in this function we have disabled the csrf and the cors protocols because we are in a Stateless case
+    // we have authorized any path from the paths /** and /api/ if they are  authenticated
+    // we have generated the token using the oauth2 protocol ,we have validated this jwt using the OIDC protocol
+    // we have declared the session management as a STATELESS
+
 
     @Bean
     protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {

@@ -1,9 +1,7 @@
 package beSoft.tn.SchedulerProject.dto;
 
-import beSoft.tn.SchedulerProject.model.AppUser;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

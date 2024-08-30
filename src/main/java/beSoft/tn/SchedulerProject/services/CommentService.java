@@ -62,4 +62,8 @@ public class CommentService {
         return commentMapper.commentToCommentDto(comment);
     }
 
+    public List<CommentDto> getCommentsByTaskId(Integer taskId) {
+        List<Comment> comments=commentRepository.findByTaskId(taskId);
+        return comments.stream().map(commentMapper::commentToCommentDto).toList();
+    }
 }

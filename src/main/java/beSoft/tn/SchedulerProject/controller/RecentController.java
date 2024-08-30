@@ -14,16 +14,24 @@ import java.util.List;
 public class RecentController {
     @Autowired
     RecentService recentService;
+    @CrossOrigin(origins = "http://localhost:4201")
     @PostMapping
     public RecentDto addRecent(@RequestBody RecentDto recent) {
         return recentService.saveRecent(recent);
     }
+    @CrossOrigin(origins = "http://localhost:4201")
     @GetMapping
     public List<RecentDto> getAllRecents() {
         return recentService.getAllRecents();
     }
+    @CrossOrigin(origins = "http://localhost:4201")
     @GetMapping("/{id}")
     public RecentDto getRecentById(@PathVariable Integer id) {
+        return recentService.getRecentById(id);
+    }
+    @CrossOrigin(origins = "http://localhost:4201")
+    @GetMapping("/user/{id}")
+    public RecentDto getRecentByUserId(@PathVariable Integer id) {
         return recentService.getRecentById(id);
     }
 }

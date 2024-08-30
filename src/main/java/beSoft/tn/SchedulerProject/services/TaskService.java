@@ -8,6 +8,7 @@ import beSoft.tn.SchedulerProject.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -90,6 +91,10 @@ public class TaskService {
                 .collect(Collectors.toList());
     }
 
+    public List<TaskDto> getAllTasksByStatus(String status) {
+        List<Task> tasks = taskRepository.findAllByStatus(status);
+        return tasks.stream().map(taskMapper::taskToTaskDto).toList();
+    }
 
     public List<DependencyDto> getAllDependenciesByTaskId(Integer taskId) {
         Task task = taskRepository.findById(taskId).orElse(null);
@@ -108,6 +113,7 @@ public class TaskService {
         return appUserMapper.appUserToAppUserDto(appUser);
     }
 
+
     public TaskDto update(TaskDto taskDto, Integer taskId) {
         taskDto.setId(taskId);
         Task task=taskMapper.taskDtoToTask(taskDto);
@@ -122,4 +128,21 @@ public class TaskService {
 
         return taskMapper.taskToTaskDto(savedTask);
     }
+
+
+    public List<TaskDto> getTasksForToday(Integer userId) {
+        LocalDate today = LocalDate.now();
+        List<Task> tasks = taskRepository.findAllByUserId(userId);
+        List<Task> tasksForToday = tasks.stream()
+                .filter(task -> {
+                    LocalDate startDate = task.getStarting();
+                    LocalDate endDate = task.getEnding();
+                    return startDate != null && endDate != null && !startDate.isAfter(today) && !endDate.isBefore(today);
+                })
+                .collect(Collectors.toList());
+        return tasksForToday.stream()
+                .map(taskMapper::taskToTaskDto)
+                .collect(Collectors.toList());
+    }
+
 }

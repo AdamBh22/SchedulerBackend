@@ -63,4 +63,9 @@ public class ActivityService {
         AppUser appUser = appUserRepository.findById(activity.getUserId()).orElse(null);
         return appUserMapper.appUserToAppUserDto(appUser);
     }
+
+    public List<ActivityDto> getActivitiesByTaskId(Integer taskId) {
+        List<Activity> activities = activityRepository.findByTaskId(taskId);
+        return activities.stream().map(activityMapper::activityToActivityDto).collect(Collectors.toList());
+    }
 }
